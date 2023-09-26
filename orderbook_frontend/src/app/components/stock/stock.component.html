@@ -1,0 +1,115 @@
+
+<div class="d-flex" style="background-color: rgb(145, 145, 145);">
+  <div class="container" style="flex: 1; margin: 0; padding: 0;">
+    <div class="row"  >
+        <div class="col-md-offset-1 col-md-10" >
+            <div class="panel" >
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-sm-4 col-xs-12">
+                            <h4 class="title">Tunis Stock  <span>Exchange</span></h4>
+                        </div>
+                        <div class="col-sm-8 col-xs-12 text-right">
+                            <div class="btn_group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <button class="btn btn-default" title="Reload"><i class="fa fa-sync-alt"></i></button>
+                                <button class="btn btn-default" title="Pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                                <button class="btn btn-default" title="Excel"><i class="fas fa-file-excel"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Symbole</th>
+                              <th>Prix d'Ouverture</th>
+                              <th>Prix le Plus Haut</th>
+                              <th>Prix le Plus Bas</th>
+                              <th>Prix de Clôture</th>
+                              <th>Volume</th>
+                              <th>Variation</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of  getCurrentPageStocks()"  [routerLink]="['/details', s.id]">
+                                <td>{{s.id}}</td>
+                                <td>{{s.symbol}}</td>
+                                <td>{{s.openPrice}}</td>
+                                <td>{{s.highPrice}}</td>
+                                <td>{{s.lowPrice}}</td>
+                                <td>{{s.closePrice}}</td>
+                                <td>{{s.volume}}</td>
+                                <td *ngIf="s.variation>0; else repture" style="color: rgb(6, 255, 105)"
+                                >+{{s.variation}}.00%</td>
+                                <ng-template #repture><td style="color: rgb(255, 50, 50)">{{s.variation}}.00% </td>
+                                </ng-template>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                      <div class="col col-sm-6 col-xs-6">Showing <b>{{ this.currentPage*15}}</b> out of <b>{{ stocks.length }}</b> entries</div>
+                      <div class="col-sm-6 col-xs-6">
+                        <ul class="pagination hidden-xs pull-right">
+                          <li><a  (click)="changePage(currentPage - 1)"  *ngIf="currentPage === 1"><</a></li>
+                          <li *ngFor="let page of getPagesArray()" [ngClass]="{ 'active': page === currentPage }">
+                            <a  (click)="changePage(page)">{{ page }}</a>
+                          </li>
+                          <li><a (click)="changePage(currentPage + 1)"  *ngIf="currentPage === getTotalPages()">></a></li>
+                        </ul>
+                        <ul class="pagination visible-xs pull-right">
+                          <li><a (click)="changePage(currentPage - 1)"  *ngIf="currentPage === 1"><</a></li>
+                          <li><a  (click)="changePage(currentPage + 1)"  *ngIf="currentPage === getTotalPages()">></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>                   
+            </div>
+            
+        </div>
+    </div>
+  </div>
+
+  <div class="container_2 col-md-3" style="flex: 0; margin: 0;padding: 0;">
+        <table class="table table-bordered border-primary">
+        <thead>
+          <tr>
+            <th scope="col">Heure</th>
+
+            <th scope="col">Ord.A</th>
+            <th scope="col">Qte.A</th>
+            <th scope="col">Achat</th>
+            <th scope="col">Vente</th>
+            <th scope="col">Qte.V</th>
+            <th scope="col">Ord.V</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Boucle pour afficher les lignes des OrderBuys et OrderSells côte à côte -->
+          <ng-container *ngFor="let orderBuy of OrderBuyBook; let i = index">
+            <tr>
+                <td>6:05</td>
+              <td>{{ 1 }}</td>
+              <td>{{ orderBuy.quantity}}</td>
+              <td>{{ orderBuy.price }}</td>
+              <td>{{ OrderSellBook[i].price }}</td>
+              <td>{{ OrderSellBook[i].quantity }}</td>
+              <td>{{ 1}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      </div>
+
+</div>
+ 
+  
+<div class="col-md-4" style="position: relative; left: 950px;top: -600px;" id="container" ></div>
+  
+  

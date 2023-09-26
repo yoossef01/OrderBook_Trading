@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="e094139f-f4d5-475f-8083-5630e018f357" name="orederbook" url="jdbc:oracle:thin:@localhost:1521:orcl" driverClass="oracle.jdbc.OracleDriver" />
+      <data-source id="4f228747-2a2e-40ef-a556-3af23e58659c" name="powerbi" url="jdbc:mysql://localhost:3306/powerbi?useSSL=false&amp;allowMultiQueries=true&amp;serverTimezone=UTC" driverClass="com.mysql.cj.jdbc.Driver" />
+    </data-sources>
+  </component>
+</project>
